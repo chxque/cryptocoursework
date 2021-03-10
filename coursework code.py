@@ -31,4 +31,21 @@ def decrypt(a,b,cipher):
         message += c    
     return message
 
-print(decrypt(5,8,'siv oc mcz i famsriqf wv sriz?'))
+def encrypt(a,b,message):
+    cipher = ''
+    for m in message:
+        m = m.upper()
+        if not (m.isspace()):
+            m = ord(m) - ord('A')
+            if ((m >= 0) and (m <= 25)):               
+                m = (((a*m)+b) % n) + ord('A')
+            else:
+                m += ord('A')
+            m = chr(m)
+        cipher += m    
+    return cipher
+    
+
+print(decrypt(5,8,'SIV OC MCZ I FAMSRIQF WV SRIZ?'))
+print(encrypt(5,8,'CAN WE GET A POGCHAMP IN CHAT?'))
+
