@@ -18,34 +18,29 @@ def inverse(a):
 
 def decrypt(a,b,cipher):
     inverseA = inverse(a)
-    message = ''
-    for c in cipher:
-        c = c.upper()
-        if not (c.isspace()):
-            c = ord(c) - ord('A')
-            if ((c >= 0) and (c <= 25)):               
-                c = (inverseA*(c-b) % n) + ord('A')
-            else:
-                c += ord('A')
-            c = chr(c)
-        message += c    
+    execute = "(a*(t-b) % n) + ord('A')"
+    message = parse(inverseA,b,cipher,execute)
     return message
 
 def encrypt(a,b,message):
-    cipher = ''
-    for m in message:
-        m = m.upper()
-        if not (m.isspace()):
-            m = ord(m) - ord('A')
-            if ((m >= 0) and (m <= 25)):               
-                m = (((a*m)+b) % n) + ord('A')
-            else:
-                m += ord('A')
-            m = chr(m)
-        cipher += m    
+    execute = "(((a*t)+b) % n) + ord('A')"
+    cipher = parse(a,b,message,execute)
     return cipher
+
+def parse(a,b,text,execute):
+    transformedtext = ''
+    for t in text:
+        t = t.upper()
+        if not (t.isspace()):
+            t = ord(t) - ord('A')
+            if ((t >= 0) and (t <= 25)):
+                t = eval(execute)
+            else:
+                t += ord('A')
+            t = chr(t)
+        transformedtext += t    
+    return transformedtext
     
 
 print(decrypt(5,8,'SIV OC MCZ I FAMSRIQF WV SRIZ?'))
 print(encrypt(5,8,'CAN WE GET A POGCHAMP IN CHAT?'))
-
