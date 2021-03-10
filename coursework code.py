@@ -17,13 +17,14 @@ def inverse(a):
         return(x+n)
 
 def decrypt(a,b,cipher):
+    inverseA = inverse(a)
     message = ''
     for c in cipher:
         c = c.upper()
         if not (c.isspace()):
             c = ord(c) - ord('A')
             if ((c >= 0) and (c <= 25)):               
-                c = (inverse(a)*(c-b) % n) + ord('A')
+                c = (inverseA*(c-b) % n) + ord('A')
             else:
                 c += ord('A')
             c = chr(c)
