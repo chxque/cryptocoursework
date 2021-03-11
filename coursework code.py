@@ -17,9 +17,8 @@ def inverse(a):
         return(x+n)
 
 def decrypt(a,b,cipher):
-    inverseA = inverse(a)
     execute = "(a*(t-b) % n) + ord('A')"
-    message = parse(inverseA,b,cipher,execute)
+    message = parse(inverse(a),b,cipher,execute)
     return message
 
 def encrypt(a,b,message):
