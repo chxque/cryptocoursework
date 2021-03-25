@@ -68,7 +68,7 @@ gives the output:
 
 ## Known issues
 #### for some reason, running using defaults in the python idle kind of does not preserve spaces
-Well, technically it doesn, but it adds spaces inbetween each character, so a space would be invisible
+Well, technically it doesnt, but it adds spaces inbetween each character, so a space would be invisible
 ![](https://raw.githubusercontent.com/chxque/cryptocoursework/main/images/Screenshot%202021-03-25%20at%2018.49.31.png)
 
 #### not really an issue, but our specific cipher text isnt high up on the crack list
