@@ -1,5 +1,5 @@
 import argparse
-
+#pulling in user inputs
 def get_args():
     parser=argparse.ArgumentParser()
     parser.add_argument('--e','--encrypt', action='store_true')
@@ -15,7 +15,7 @@ def get_args():
 letterFrequencyArray = (['E','T','A','O','I','N','S','R','H','D','L','U','C','M','F','Y','W','G','P','B','V','K','X','Q','J','Z'],
                         [0.1202,0.091,0.0812,0.0768,0.0731,0.0695,0.0628,0.0602,0.0592,0.0432,0.0398,0.0288,0.0271,0.0261,0.0230,0.0211,0.0209,0.0203,0.0182,0.0149,0.0111,0.0069,0.0017,0.0011,0.001,0.0007])
 
-
+#Bubble sort for 2d array
 def twoDimensionalBubble(array):
     for i in range(len(array[0])):
         for j in range(len(array[0])-1):
@@ -52,12 +52,12 @@ def plaintext(m1,m2,c1,c2):
     return a,b,gcd
 
 def decrypt(a,b,cipher):
-    execute = "(a*(t-b) % 26) + ord('A')"
+    execute = "(a*(t-b) % 26) + ord('A')" #Decryption formula for affine cipher
     message = parse(egcd(a,26)[1],b,cipher,execute)
     return message
 
 def encrypt(a,b,message):
-    execute = "(((a*t)+b) % 26) + ord('A')"
+    execute = "(((a*t)+b) % 26) + ord('A')"#Encryption formula for affine cipher
     cipher = parse(a,b,message,execute)
     return cipher
 
@@ -69,9 +69,12 @@ def parse(a,b,text,execute):
         t = t.upper()
         if not (t.isspace()):
             t = ord(t) - ord('A')
+            #ensuring current character is a valid character
             if ((t >= 0) and (t <= 25)):
+                #executing currently defined equation
                 t = eval(execute)
             else:
+                #returns character if not valid entry
                 t += ord('A')
             t = chr(int(t))
         transformedtext += t    
@@ -99,6 +102,7 @@ def frequencyAnalysisCrack(cipherText,probabilityMin):
     print(crackText)
     del TempCrackText
     possibleKnownCombinations = [],[],[]
+    #going through combinations of two possible plaintext matches to the two most common letters in the ciphertext
     for i in range(len(letterFrequencyArray[0])):
         for j in range(len(letterFrequencyArray[0])):
             probability = (letterFrequencyArray[1][i] + letterFrequencyArray[1][j] + crackText[1][0] + crackText[1][1]) / 4
@@ -121,13 +125,14 @@ def frequencyAnalysisCrack(cipherText,probabilityMin):
             
     
 
-key, encryptBool, decryptBool, messageText, crackBool, probabilityMin = get_args()
+key, encryptBool, decryptBool, messageText, crackBool, probabilityMin = get_args()#calls the get args function and saves the return data as variables
 
 if(crackBool):
     print(messageText)
     frequencyAnalysisCrack(messageText,probabilityMin)
 elif encryptBool or decryptBool:
     a,b=[int(x) for x in key.split(',')]
+    #calls the users specified functions
     if(encryptBool):
         print(encrypt(a,b,messageText))
 
