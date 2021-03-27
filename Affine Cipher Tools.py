@@ -116,7 +116,7 @@ def frequencyAnalysisCrack(cipherText,probabilityMin):
             if not(letterFrequencyArray[0][i] == letterFrequencyArray[0][j]) and probability >= probabilityMin: #ensuring the two 'known' plaintexts arent the same, as thats impossible and a waste of computing
                 currentCombination = [letterFrequencyArray[0][i],letterFrequencyArray[0][j],crackText[0][0],crackText[0][1]] # temporary array just to make it easier to read contains the current m1,m2,c1,c2
                 combinationInfo = plaintext(currentCombination[0],currentCombination[1],currentCombination[2],currentCombination[3]) #  calculating the a and b keys, and the gcd of the a key of the current combination
-                if combinationInfo[2] == 1: #ensuring the key is valid
+                if (combinationInfo[2] == 1) and (combinationInfo not in possibleKnownCombinations[2]): #ensuring the key is valid, and not already used
                     possibleKnownCombinations[0].append(currentCombination)
                     possibleKnownCombinations[1].append(probability)
                     possibleKnownCombinations[2].append(combinationInfo) #appending the new possible combination to the array
