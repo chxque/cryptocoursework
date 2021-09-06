@@ -80,10 +80,3 @@ here are some of the other teams cipher texts:
 
 ------------
 
-*Philip Blamire (P2538576)*
-
-*Nicky Basi (P2535513)*
-
-*Marti Borisov (P2535513)*
-
-*Osama Mohammed A Alzahrani (P2524209)*
